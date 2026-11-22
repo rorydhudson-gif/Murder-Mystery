@@ -54,7 +54,7 @@ const fresh=()=>({view:'overview',selected:'rory',activeEmail:null,activeExhibit
 let s=fresh();try{const existing=JSON.parse(localStorage.getItem(STORE)||'null');if(existing&&typeof existing==='object'){s={...s,...existing};for(const key of ['first','second'])for(const p of PEOPLE)s[key][p.id]={decision:'',exhibits:[],notes:'',...(s[key][p.id]||{})}}}catch(e){}
 const $=id=>document.getElementById(id);
 function save(){try{localStorage.setItem(STORE,JSON.stringify(s))}catch(e){}}
-const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function emailOpen(id){return s.opened.includes(id)}
 const allSupplementRead=()=>SUPPLEMENT.every(e=>emailOpen(e.id));
 const allFinalRead=()=>FINAL.every(e=>emailOpen(e.id));
